@@ -119,13 +119,13 @@ public class Chapter1Test {
 	}
 	/**
 	 * 1.1.22
+	 * UNIX 平台，绝对路径名的前缀始终是 "/",windows是"\",可用 file.separator代替
+	 * java找文件是在项目根目录下开始找
 	 */
 	@Test
 	public void testRank(){
-		File f = new File("./tinyW");
-		System.out.println(f.exists());
-		/*In inw = new In("./tinyW");
-		In in = new In("./tinyT");
+		In inw = new In("./src/test/java/algorithms/fundamentals/tinyW");
+		In in = new In("./src/test/java/algorithms/fundamentals/tinyT");
 		int[] whitelist = inw.readAllInts();
 		int[] key = in.readAllInts();
         Arrays.sort(whitelist);
@@ -133,7 +133,7 @@ public class Chapter1Test {
         // read key; print if not in whitelist
         for (int i = 0; i < key.length; i++) {
             if (Chapter1.rank(key[i],whitelist ) == -1)
-                StdOut.println(key);
-		}*/
+                StdOut.println("不存在"+key[i]);
+		}
 	}
 }
