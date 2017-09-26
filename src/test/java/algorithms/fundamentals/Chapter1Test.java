@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import algorithms.Fundamentals.Chapter1;
+import algorithms.Fundamentals.Counter;
 import algorithms.StdLib.In;
 import algorithms.StdLib.StdIn;
 import algorithms.StdLib.StdOut;
@@ -135,5 +136,55 @@ public class Chapter1Test {
             if (Chapter1.rank(key[i],whitelist ) == -1)
                 StdOut.println("不存在"+key[i]);
 		}
+	}
+	/**
+	 * 1.1.24测试
+	 */
+	@Test
+	public void testEuclid(){
+		System.out.println("----p----|----q----");
+		StdOut.printf("最大公约数："+Chapter1.euclid(1111111, 1234567));
+	}
+	/**习题1.1.27测试
+	 *  java binomial 10  5 0.5:         1,233 calls
+     *  java binomial 20 10 0.5:     1,216,535 calls
+     *  java binomial 30 15 0.5: 1,219,164,498 calls
+	 */
+	@Test
+	public void testBinomial(){
+		Counter counter = new Counter("calls");
+		System.out.println(Chapter1.binomial(20, 10, 0.5, counter));
+		System.out.println(counter.toString());
+	}
+	/**习题1.1.27b测试
+	 *  java binomialB 10   5 0.5:         50 calls
+     *  java binomialB 20  10 0.5:     	  175 calls
+     *  java binomialB 30  15 0.5: 		  375 calls
+     *  java binomialB 100 50 0.5:       3875 calls
+	 */
+	@Test
+	public void testBinomialB(){
+		Counter counter = new Counter("calls");
+		System.out.println(Chapter1.binomialB(100, 50, 0.5, counter));
+		System.out.println(counter.toString());
+	}
+	/**
+	 * 1.1.28去重测试
+	 */
+	@Test
+	public void testDel(){
+		In inw = new In("./src/test/java/algorithms/fundamentals/tinyW");
+		int[] whitelist = inw.readAllInts();
+        Arrays.sort(whitelist);
+
+        for (int t : whitelist) {
+            StdOut.print(" " + t);
+        }
+        StdOut.println();
+        int[] res = Chapter1.del(whitelist);
+
+        for (int t : res) {
+            StdOut.print(" " + t);
+        }
 	}
 }

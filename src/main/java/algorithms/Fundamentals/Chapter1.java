@@ -2,8 +2,10 @@ package algorithms.Fundamentals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import algorithms.StdLib.StdIn;
 import algorithms.StdLib.StdOut;
@@ -194,7 +196,7 @@ public class Chapter1 {
 	public static int rank(int key, int[] a){
 		return rank(key,a,0,a.length-1,0);
 	}
-	public static int rank(int key,int[] a,int lo,int hi,int indent){
+	private static int rank(int key,int[] a,int lo,int hi,int indent){
 		if(lo>hi) return -1;
 		int mid = lo + (hi-lo)/2;
 		StdOut.printf("%s%-4d%d\n", repeat(4*indent++, ' '), lo, hi);
@@ -212,4 +214,81 @@ public class Chapter1 {
             s += c;
         return s;
     }
+	/**习题1.1.24欧几里得
+	 * @return
+	 * 计算两个非负整数p和q的最大公约数：若q是0，则最大公约数为p，否
+	 * 则将p除以q得到余数r，p和q的最大公约数即为q和r的最大公约数
+	 * 105和24的求最大公约数时一系列p，q值
+	 * 24   9
+	 * 9    6
+	 * 6    3
+	 * 3    0 最大公约数为三
+	 */
+	public static int euclid(int p,int q){
+		StdOut.printf("%-9d|%9d\n", p,q);
+		if(q==0) return p;
+		return euclid(q,p%q);
+	}
+	/**习题1.1.27二项分布a
+	 * @param n
+	 * @param k
+	 * @param p
+	 * @return
+	 */
+	public static double binomial(int n,int k,double p,Counter counter){
+		if(n==0&&k==0) return 1.0;
+		if(n<0||k<0) return 0.0;
+		counter.increment();
+		return (1.0-p)*binomial(n-1,k,p,counter)+p*binomial(n-1,k-1,p,counter);
+	}
+	/**习题1.1.27二项分布b
+	 * @param n
+	 * @param k
+	 * @param p
+	 * @return
+	 * 空间换时间利用数组保存计算过的值
+	 */
+	public static double binomialB(int n,int k,double p,Counter counter){
+		double[][] a = new double[n+1][k+1];
+		for (int i = 0; i <= n; i++)
+            for (int j = 0; j <= k; j++)
+                a[i][j] = -1;
+		return binomialB(a,n,k,p,counter);
+	}
+	private static double binomialB(double[][] a,int n,int k,double p,Counter counter){
+		if(n==0&&k==0) return 1.0;
+		if(n<0||k<0) return 0.0;
+		if(a[n][k]==-1){
+			counter.increment();
+			a[n][k]=(1.0-p)*binomialB(a,n-1,k,p,counter)+p*binomialB(a,n-1,k-1,p,counter);
+		}
+		return a[n][k];
+	}
+	/**习题1.1.28删除重复数据
+	 * @param n
+	 * @param k
+	 * @param p
+	 * @return
+	 * 循环数组使用list.add(),重复元素就覆盖了;
+	 * 或者直接操作数组
+	 */
+	public static int[] del(int[] a){
+		int[] b = new int[a.length-countRepeat(a)];
+		int k = 0;
+		b[0]=a[0];
+		for(int i = 0; i < a.length-1; i++){
+			if(a[i]!=a[i+1]){
+				k++;
+				b[k]=a[i+1];
+			} 
+		}
+		return b;
+	}
+	private static int countRepeat(int[] a){
+		int count = 0;
+		for (int i = 0; i < a.length-1; i++) {
+			if(a[i]==a[i+1]) count++;
+		}
+		return count;
+	}
 }
