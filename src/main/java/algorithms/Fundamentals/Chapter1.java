@@ -199,9 +199,9 @@ public class Chapter1 {
 		int mid = lo + (hi-lo)/2;
 		StdOut.printf("%s%-4d%d\n", repeat(4*indent++, ' '), lo, hi);
 		if(a[mid]>key){
-			return rank(key,a,lo,mid,indent);
+			return rank(key,a,lo,mid-1,indent);
 		}else if(a[mid]<key){
-			return rank(key,a,mid,hi,indent);
+			return rank(key,a,mid+1,hi,indent);
 		}else{
 			return mid;
 		}
