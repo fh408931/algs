@@ -187,4 +187,51 @@ public class Chapter1Test {
             StdOut.print(" " + t);
         }
 	}
+	/**
+	 * 1.1.29测试
+	 */
+	@Test
+	public void testRankAndCount(){
+		In inw = new In("./src/test/java/algorithms/fundamentals/tinyW");
+		int[] whitelist = inw.readAllInts();
+        Arrays.sort(whitelist);
+
+        String indices = "",
+                values = "";
+         for (int i = 0; i < whitelist.length; i++)
+         {
+             indices += String.format("%4d", i);
+             values += String.format("%4d", whitelist[i]);
+         }
+         StdOut.println(indices + "\n" + values);
+
+         while (!StdIn.isEmpty()) {
+             int key = StdIn.readInt();
+             int r = Chapter1.rank(key, whitelist);
+             int c = Chapter1.count(key, whitelist);
+             StdOut.printf("(%d, %d)", r, c);
+        }
+	}
+	/**1.1.31测试
+	 * 
+	 */
+	@Test
+	public void testDraw(){
+		
+        
+		double x = 10.0;
+	    double y = 10.0;
+	    double r = 9.0;
+	    Chapter1.drawCircle(x, y, r);
+	    double[][] points = Chapter1.drawPoints(x, y, r, 5);
+	    Chapter1.randomLinkPoints(points, 0.5);
+	}
+	public static void main(String[] args) {
+		double x = 10.0;
+	    double y = 10.0;
+	    double r = 9.0;
+	    Chapter1.drawCircle(x, y, r);
+	    double[][] points = Chapter1.drawPoints(x, y, r, 6);
+	    Chapter1.randomLinkPoints(points, 0.6);
+	}
 }

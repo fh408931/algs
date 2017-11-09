@@ -7,8 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import algorithms.StdLib.StdDraw;
 import algorithms.StdLib.StdIn;
 import algorithms.StdLib.StdOut;
+import algorithms.StdLib.StdRandom;
 
 /*
  * 第一章基础第一部分基础编程模型
@@ -290,5 +292,120 @@ public class Chapter1 {
 			if(a[i]==a[i+1]) count++;
 		}
 		return count;
+	}
+	
+	/**1.1.29等值键
+	 * @param a 有序数组
+	 * @param key int值
+	 * @return 数组中小于key值的所有元素数量
+	 */
+	public static int rank(int[] a,int key){
+		int lo = 0;
+		int hi = a.length-1;
+		while(lo<=hi){
+			int mid= lo+(hi-lo)/2;
+			if(key>a[mid]){
+				lo = mid+1;
+			}else if(key<a[mid]){
+				hi = mid-1;
+			}else{
+				while(--mid>=0&&key==a[mid]);
+				return mid+1;
+			}
+		}
+		return 0;
+		
+	}
+	/**1.1.29等值键
+	 * @param key int值
+	 * @param a 有序数组
+	 * @return 数组中等于key值的所有元素数量
+	 */
+	public static int count(int key,int[] a){
+		int lo = 0;
+		int hi = a.length-1;
+		int count = 1;
+		while(lo<=hi){
+			int mid= lo+(hi-lo)/2;
+			if(key>a[mid]){
+				lo = mid+1;
+			}else if(key<a[mid]){
+				hi = mid-1;
+			}else{
+				for (int i=mid-1;i>=0&&key==a[i];i--) {
+					count++;
+				}
+				for (int j=mid+1;j<=a.length-1&&key==a[j];j++) {
+					count++;
+				}
+				return count;
+			}
+		}
+		return 0;
+	}
+	/**1.1.30互质为true，否则false，使用欧几里得
+	 * @param n
+	 * @return
+	 */
+	public static boolean[][] el(int n){
+		boolean[][] flag = new boolean[n][n];
+		for(int i=0;i<n;i++){
+			for(int j=0;j<n;j++){
+				if(euclid(i, j)==1){
+					flag[i][j]=true;
+				} 
+				flag[i][j]=false;
+			}
+		}
+		return flag;
+	}
+	/**
+	 * 画圆
+	 * @param x 圆心x坐标
+	 * @param y 圆心y坐标
+	 * @param r 半径r
+	 */
+	public static void drawCircle(double x, double y, double r) {
+	    StdDraw.setXscale(0, 2 * x);
+	    StdDraw.setYscale(0, 2 * y);
+	    StdDraw.setPenRadius(0.003);
+	    StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
+	    StdDraw.circle(x, y, r);
+	}
+
+	/**
+	 * 在圆上描点
+	 * @param x0 圆心x坐标
+	 * @param y0 圆心y坐标
+	 * @param r 半径r
+	 * @param N N个点
+	 */
+	public static double[][] drawPoints(double x0, double y0, double r, int N) {
+	    double[][] points = new double[N][2];
+	    StdDraw.setPenRadius(0.005);
+	    StdDraw.setPenColor(StdDraw.BOOK_RED);
+	    for(int idx = 0; idx < N; ++idx) {
+	        double x = x0 + r * Math.cos(2 * Math.PI * idx / N);
+	        double y = y0 + r * Math.sin(2 * Math.PI * idx / N);
+	        StdDraw.point(x, y);
+	        points[idx][0] = x;
+	        points[idx][1] = y;
+	    }
+	    return points;
+	}
+
+	/**
+	 * 以概率p随机连接顶点集points中的点
+	 * @param points    点集
+	 * @param p 概率p
+	 */
+	public static void randomLinkPoints(double[][] points, double p) {
+		StdDraw.setPenRadius(0.002);
+	    StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
+	    int length = points.length;
+	    for(int i = 0; i < length; ++i)
+	        for(int j = 0; j < length; ++j)
+	            if(true == StdRandom.bernoulli(p))
+	                StdDraw.line(points[i][0], points[i][1], points[j][0], points[j][1]); // 应该再建立一个包含x坐标和y坐标的数据结构
 	}
 }
