@@ -14,6 +14,6 @@ Maven构建项目，测试使用junit
 
 	</dependency>
 
-This is [an example](http://example.com/ "Title") inline link.
+测试类(./src/test/java/algorithms).
 
 [This link](http://example.net/) has no title attribute.
