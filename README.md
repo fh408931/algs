@@ -14,8 +14,9 @@ Maven构建项目，测试使用junit
 
 	</dependency>
 
-[习题目录](http://example.net/) has no title attribute.
+[习题目录](./src/main/java/algorithms/).
 
 [测试类目录](./src/test/java/algorithms).
 
-[原书教学库](./src/test/java/algorithms).
+[第一章第一节习题](./src/main/java/algorithms/Fundamentals/Chapter1.java).
+[第一章第一节测试](./src/test/java/algorithms/fundamentals/Chapter1Test.java).
