@@ -1,15 +1,14 @@
 package algorithms.fundamentals;
 
-import java.io.File;
 import java.util.Arrays;
 
 import org.junit.Test;
 
 import algorithms.Fundamentals.Chapter1;
 import algorithms.Fundamentals.Counter;
-import algorithms.StdLib.In;
-import algorithms.StdLib.StdIn;
-import algorithms.StdLib.StdOut;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 /*
  * 第一章基础第一部分基础编程模型
@@ -234,4 +233,12 @@ public class Chapter1Test {
 	    double[][] points = Chapter1.drawPoints(x, y, r, 6);
 	    Chapter1.randomLinkPoints(points, 0.6);
 	}
+	/**1.1.31测试
+	 * 
+	 */
+	@Test
+	public void testHist(){
+	}
+	
+	
 }
