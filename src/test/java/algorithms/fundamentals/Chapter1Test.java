@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import algorithms.Fundamentals.Chapter1;
-import algorithms.Fundamentals.Counter;
+import algorithms.fundamentals.basic.Chapter1;
+import algorithms.fundamentals.basic.Counter;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
